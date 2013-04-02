@@ -49,15 +49,17 @@ func run() {
     res := compBytes(hash(str), goalbytes)
     if res < best {
       fmt.Printf("%d '%s'\n", res, str)
-      http.Get("http://lewisjellis.webscript.io/skeinlog?bits=" + strconv.Itoa(res) + "&number=" + str)
-      if res < 406 {
-        resp, _ := http.PostForm("http://almamater.xkcd.com/?edu=seas.upenn.edu",
-                      url.Values{"hashable": {str}})
-        buf := new(bytes.Buffer)
-        buf.ReadFrom(resp.Body)
-        s := buf.String()
-        fmt.Printf("%s\n", s)
-        defer resp.Body.Close()
+      if res < 430 {
+        http.Get("http://lewisjellis.webscript.io/skeinlog?bits=" + strconv.Itoa(res) + "&number=" + str)
+        if res < 406 {
+          resp, _ := http.PostForm("http://almamater.xkcd.com/?edu=seas.upenn.edu",
+                        url.Values{"hashable": {str}})
+          buf := new(bytes.Buffer)
+          buf.ReadFrom(resp.Body)
+          s := buf.String()
+          fmt.Printf("%s\n", s)
+          defer resp.Body.Close()
+        }
       }
       best = res
     }
