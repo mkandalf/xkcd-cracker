@@ -49,6 +49,7 @@ func run() {
     res := compBytes(hash(str), goalbytes)
     if res < best {
       fmt.Printf("%d '%s'\n", res, str)
+      http.Get("http://lewisjellis.webscript.io/skeinlog?bits=" + strconv.Itoa(res) + "&number=" + str)
       if res < 406 {
         resp, _ := http.PostForm("http://almamater.xkcd.com/?edu=seas.upenn.edu",
                       url.Values{"hashable": {str}})
@@ -63,7 +64,7 @@ func run() {
   }
 }
 func main() {
-  for i := 0; i < 7; i++ {
+  for i := 0; i < 2; i++ {
     go run()
   }
   run()
