@@ -45,7 +45,7 @@ func run() {
   rand.Seed(time.Now().UTC().UnixNano())
   best := 1000
   goalbytes, _ := hex.DecodeString(goal)
-  for i := 0; i < 1000000; i++ {
+  for {
     str := strconv.FormatInt(rand.Int63(), 10)
     res := compBytes(hash(str), goalbytes)
     if res < best {
