@@ -1,3 +1,5 @@
+// Based on a script by zwass (Zach Wasserman)
+
 package main
 
 import (
